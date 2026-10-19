@@ -7,10 +7,11 @@ from typing import Callable, Iterable
 
 from PIL import Image, ImageStat
 
-BASE_DIR = Path(__file__).resolve().parent
-static_path = BASE_DIR / "sourceimgs2"
-real_path = BASE_DIR / "sourceimgs1"
-DEFAULT_OUTPUT = BASE_DIR / "finalproduct.jpg"
+BASE_DIR = Path(__file__).resolve().parent.parent
+ASSETS_DIR = BASE_DIR / "assets"
+static_path = ASSETS_DIR / "sources" / "solid-colors"
+real_path = ASSETS_DIR / "sources" / "real-world"
+DEFAULT_OUTPUT = BASE_DIR / "output" / "finalproduct.jpg"
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
 ProgressCallback = Callable[[int, int], None]
 
@@ -113,7 +114,7 @@ def _run_cli() -> None:
             return
         if response not in {"1", "2", "3", "4"}:
             raise ValueError("Target must be 1, 2, 3, or 4.")
-        result = generate(BASE_DIR / f"target{response}.jpg", rows, cols, static_path)
+        result = generate(ASSETS_DIR / "targets" / f"target{response}.jpg", rows, cols, static_path)
     except (FileNotFoundError, ValueError) as error:
         print(f"Unable to generate mosaic: {error}")
         return

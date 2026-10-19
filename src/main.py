@@ -34,7 +34,7 @@ class MosaicInterface(QWidget):
         self.setWindowTitle("Mosaic Generator")
         self.resize(960, 620)
         self._build_ui()
-        self._set_preview(mosaic.BASE_DIR / "placeholder.png")
+        self._set_preview(mosaic.ASSETS_DIR / "placeholder.png")
 
     def _build_ui(self) -> None:
         self.source_box = QComboBox()
@@ -45,7 +45,9 @@ class MosaicInterface(QWidget):
         self.target_box = QComboBox()
         self.target_box.addItem("Choose a sample target", None)
         for index in range(1, 5):
-            self.target_box.addItem(f"Sample {index}", mosaic.BASE_DIR / f"target{index}.jpg")
+            self.target_box.addItem(
+                f"Sample {index}", mosaic.ASSETS_DIR / "targets" / f"target{index}.jpg"
+            )
         self.target_box.currentIndexChanged.connect(self._sample_selected)
 
         self.rows_box = QSpinBox()
@@ -97,7 +99,7 @@ class MosaicInterface(QWidget):
         filename, _ = QFileDialog.getOpenFileName(
             self,
             "Choose target image",
-            str(mosaic.BASE_DIR),
+            str(mosaic.ASSETS_DIR),
             "Images (*.png *.jpg *.jpeg *.bmp *.webp)",
         )
         if filename:
