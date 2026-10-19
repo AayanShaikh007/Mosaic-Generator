@@ -4,6 +4,9 @@ This desktop Python application turns a target image into a photo mosaic. Each
 target cell is replaced with the source image whose average color is closest
 to that cell.
 
+<img width="981" height="661" alt="image" src="https://github.com/user-attachments/assets/f568a858-d1e6-4a53-aefc-0c489e4986cc" />
+
+
 ## Setup
 
 Use Python 3.10 or newer. From this directory:
